@@ -14,13 +14,8 @@ public class PlCtrl : MonoBehaviour
     private BoxCollider2D BoxCol;
     public float jumpingHeight;
     public LinkScene linkScene;
-    private float TopScore = 0.0f;
-    
-    public Text scoreText;
-    //private float falling;
-    
-    //public Transform PLAYER;
-    
+    private float TopScore = 0.0f;    
+    public Text scoreText;        
     SpriteRenderer SRflip;
     Animator anim;
 
@@ -41,7 +36,7 @@ public class PlCtrl : MonoBehaviour
         {
             TopScore = transform.position.y;
         }
-        scoreText.text = "Score" + Mathf.Round(TopScore).ToString();
+        scoreText.text = "Score" + Mathf.Round(TopScore).ToString(); //score++ (no limit, no max score)
 
         if(Input.GetKey(KeyCode.A))
         {
@@ -53,7 +48,7 @@ public class PlCtrl : MonoBehaviour
         }
         anim.SetInteger("PlayerCondition", 0);        
 
-        if(player.transform.position.y <= -50)
+        if(player.transform.position.y <= -50) //Player Fall down = dead
         {
             linkScene.LoadScene("DeadScene");
         }
@@ -66,7 +61,7 @@ public class PlCtrl : MonoBehaviour
             anim.SetInteger("PlayerCondition", 1);
 
             StartCoroutine(SetDelay());
-            rb.AddForce(Vector2.up * jumpingHeight);            
+            rb.AddForce(Vector2.up * jumpingHeight); //auto jumping when touching the platform            
         }
         if (collision.gameObject.tag == "Trap")
         {
@@ -74,9 +69,7 @@ public class PlCtrl : MonoBehaviour
             linkScene.LoadScene("DeadScene");
         }
     }
-
     
-
     IEnumerator SetDelay()
     {
         yield return new WaitForSeconds(3);
