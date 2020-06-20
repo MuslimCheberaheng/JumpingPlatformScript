@@ -8,10 +8,9 @@ public class Score : MonoBehaviour
     public GameObject UI;
     void Awake()
     {
-        DontDestroyOnLoad(UI);
+        DontDestroyOnLoad(UI); //show score between scenes
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         UI = GameObject.FindGameObjectWithTag("Score");
